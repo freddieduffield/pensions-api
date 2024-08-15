@@ -1,4 +1,5 @@
 import { PensionPotController } from "./controller/PensionPotController"
+import { PotsController } from "./controller/PotsController"
 import { SearchedPensionsController } from "./controller/SearchedPensionsController"
 
 export const Routes = [{
@@ -8,12 +9,12 @@ export const Routes = [{
     action: "all"
 }, {
     method: "get",
-    route: "/pension-pots/:id",
-    controller: PensionPotController,
-    action: "one",
-}, {
-    method: "get",
     route: "/searched-pensions",
     controller: SearchedPensionsController,
     action: "all",
+} , {
+    method: "get",
+    route: "/pots",
+    controller: PotsController,
+    action: "all", 
 }]
