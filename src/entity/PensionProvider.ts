@@ -1,14 +1,21 @@
-import { Entity, Column, OneToOne, PrimaryColumn } from 'typeorm';
+import { Entity, Column, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { PensionPot } from './PensionPot';
+import { SearchedPensions } from './SearchedPensions';
 
 @Entity('pension_providers')
 export class PensionProvider {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   value: string;
 
   @OneToOne(() => PensionPot, (pensionPot) => pensionPot.pensionProvider)
-  pensionPot: PensionPot;
+  pensionPot: PensionPot
+
+  @OneToOne(() => SearchedPensions, (searchedPensions) => searchedPensions.pensionProvider)
+  searchedPensions: PensionPot
 }
