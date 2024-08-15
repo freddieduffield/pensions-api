@@ -49,4 +49,28 @@ export class PotsController {
         return { message: 'An error occurred while searching pension pots' };
       }
   }
+
+  async searchValue(request: Request, response: Response) {
+    try {
+      const { value } = request.params;
+      const {  greaterThan, lessThan } = request.query;
+              
+      const queryBuilder = this.pensionPotRepository.createQueryBuilder('pot')
+      .leftJoinAndSelect('pot.pensionProvider', 'pensionProvider');
+
+      if (greaterThan) {
+        queryBuilder.andWhere(`pot.${value} > :greaterThan`, { greaterThan });
+      }
+    
+      if (lessThan) {
+        queryBuilder.andWhere(`pot.${value} < :lessThan`, { lessThan, value });
+      }
+
+      return queryBuilder.getMany();
+
+      
+    } catch (error) {
+      return { message: 'An error occurred while searching pension pots' };
+    }
+}
 }

@@ -22,4 +22,9 @@ export const Routes = [{
     route: "/pots/search",
     controller: PotsController,
     action: "searchPots",  
+}, {
+    method: "get",
+    route: "/pots/search/:value",
+    controller: PotsController,
+    action: "searchValue",
 }]
