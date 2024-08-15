@@ -8,11 +8,13 @@ export async function populateDatabase() {
     const pensionPotRepository = AppDataSource.getRepository(PensionPot);
     const pensionProviderRepository =
       AppDataSource.getRepository(PensionProvider);
-    const searchedPensionsRepository = AppDataSource.getRepository(SearchedPensions);  
+    const searchedPensionsRepository =
+      AppDataSource.getRepository(SearchedPensions);
 
+    await searchedPensionsRepository.delete({});
+    
     await pensionPotRepository.delete({});
     await pensionProviderRepository.delete({});
-    await searchedPensionsRepository.delete({});
 
     const pensionProviders = [
       { name: 'Aviva', value: 'AVIVA' },
@@ -41,7 +43,6 @@ export async function populateDatabase() {
         isWorkplacePension: false,
       },
       {
-        id: '1509481e-565d-444a-8e24-d72d3244b663',
         potName: 'Mintago',
         annualInterestRate: null,
         defaultAnnualInterestRate: 0.02,
@@ -56,7 +57,6 @@ export async function populateDatabase() {
         isWorkplacePension: false,
       },
       {
-        id: 'c759b80a-558a-488d-aba9-f1ee9593020b',
         potName: 'Microsoft',
         annualInterestRate: 0.02,
         defaultAnnualInterestRate: 0.02,
@@ -71,7 +71,6 @@ export async function populateDatabase() {
         isWorkplacePension: false,
       },
       {
-        id: '3e2bfea6-d7bb-4ef6-8dea-2a149b4ef24c',
         potName: 'Pot 1',
         annualInterestRate: 0.035,
         defaultAnnualInterestRate: 0.02,
@@ -86,7 +85,6 @@ export async function populateDatabase() {
         isWorkplacePension: false,
       },
       {
-        id: '1bbb9dfc-eb62-4988-9fab-7e0a52844d8c',
         potName: 'Pot 2',
         annualInterestRate: 0.02,
         defaultAnnualInterestRate: 0.02,
@@ -101,7 +99,6 @@ export async function populateDatabase() {
         isWorkplacePension: false,
       },
       {
-        id: 'd18083cf-4990-4248-a3e8-37140706a8d7',
         potName: 'A company',
         annualInterestRate: 0.002,
         defaultAnnualInterestRate: 2,
@@ -115,17 +112,8 @@ export async function populateDatabase() {
         monthlyPayment: 200,
         isWorkplacePension: false,
       },
-    ];
-
-    const searchedPensions = [
       {
-        id: '0a4c2ed0-3b0c-4606-817e-e6f8d14dbfd2',
         potName: 'Searched Pension',
-        policyNumber: null,
-        annualFee: null,
-        status: 'TO_HUNT',
-        previousName: null,
-        previousAddress: '12 Something St',
         annualInterestRate: 0.02,
         defaultAnnualInterestRate: 0.02,
         pensionProvider: {
@@ -134,19 +122,11 @@ export async function populateDatabase() {
         },
         amount: 0,
         employer: 'Homebase',
-        foundOn: '2020-06-11T10:52:33.819Z',
         lastUpdatedAt: '2022-05-21T17:32:03.376Z',
         monthlyPayment: 0,
-        isDraft: true,
       },
       {
-        id: '4b6004d2-58f6-45c6-9a27-045b9571ae3e',
         potName: 'Pension',
-        policyNumber: null,
-        annualFee: null,
-        status: 'FOUND',
-        previousName: null,
-        previousAddress: '12 Something St',
         annualInterestRate: 0.02,
         defaultAnnualInterestRate: 0.02,
         pensionProvider: {
@@ -155,9 +135,29 @@ export async function populateDatabase() {
         },
         amount: 40000,
         employer: 'Telegraph',
-        foundOn: '2024-08-11T10:52:33.819Z',
         lastUpdatedAt: '2024-06-11T10:52:33.819Z',
         monthlyPayment: 0,
+      },
+    ];
+    
+
+    const searchedPensions = [
+      {
+        policyNumber: null,
+        annualFee: null,
+        status: 'TO_HUNT',
+        previousName: null,
+        previousAddress: '12 Something St',
+        foundOn: '2020-06-11T10:52:33.819Z',
+        isDraft: true,
+      },
+      {
+        policyNumber: null,
+        annualFee: null,
+        status: 'FOUND',
+        previousName: null,
+        previousAddress: '12 Something St',
+        foundOn: '2024-08-11T10:52:33.819Z',
         isDraft: false,
       },
     ];
@@ -175,20 +175,26 @@ export async function populateDatabase() {
       pot.pensionProvider = savedPensionProviders[providerIndex];
     });
 
-
-    // Assign saved pension providers to searched pensions 
-    // searchedPensions.forEach((searchedPension) => {
-    //   const providerIndex = pensionProviders.findIndex(
-    //     (provider) => provider.name === searchedPension.pensionProvider.name
-    //   );
-    //   searchedPension.pensionProvider = savedPensionProviders[providerIndex];
-    // });
-
     // Save pension pots
     await pensionPotRepository.save(pensionPots);
 
+    // Add pension pot ids to searched pensions
+    const pensionPotsThatHaveBeenSearched = await pensionPotRepository.find({
+      where: [
+        { potName: 'Searched Pension' },
+        { potName: 'Pension' },
+      ]
+    });
+
+    const searchedPensionsWithPots = searchedPensions.map((searchedPension, index) => {
+      return {
+        ...searchedPension,
+        pensionPotId: pensionPotsThatHaveBeenSearched[index].id,
+      }
+    });
+
     // Save searched pensions
-    await searchedPensionsRepository.save(searchedPensions);
+    await searchedPensionsRepository.save(searchedPensionsWithPots);
 
     console.log('Database populated successfully');
   } catch (error) {

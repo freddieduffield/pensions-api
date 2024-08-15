@@ -14,8 +14,5 @@ export class PensionProvider {
   value: string;
 
   @OneToOne(() => PensionPot, (pensionPot) => pensionPot.pensionProvider)
-  pensionPot: PensionPot
-
-  @OneToOne(() => SearchedPensions, (searchedPensions) => searchedPensions.pensionProvider)
-  searchedPensions: PensionPot
+  pensionPot: PensionPot;
 }

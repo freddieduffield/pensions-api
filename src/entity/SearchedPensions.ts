@@ -5,16 +5,23 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   UpdateDateColumn,
+  TableForeignKey,
+  ManyToOne,
 } from 'typeorm';
 import { PensionProvider } from './PensionProvider';
+import { PensionPot } from './PensionPot';
 
 @Entity('searched_providers')
 export class SearchedPensions {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  potName: string;
+  @ManyToOne(() => PensionPot, pensionPot => pensionPot.searchedPensions)
+  @JoinColumn({ name: 'pensionPotId' })
+  pensionPot: PensionPot;
+
+  @Column({ nullable: true })
+  pensionPotId: string;
 
   @Column({ nullable: true })
   policyNumber: number;
@@ -31,34 +38,8 @@ export class SearchedPensions {
   @Column({ nullable: true })
   previousAddress: string;
 
-  @Column({ type: 'float' })
-  annualInterestRate: number;
-
-  @Column({ type: 'float' })
-  defaultAnnualInterestRate: number;
-
-  @OneToOne(
-    () => PensionProvider,
-    (pensionProvider) => pensionProvider.searchedPensions,
-    { cascade: true, onDelete: 'CASCADE' }
-  )
-  @JoinColumn()
-  pensionProvider: PensionProvider;
-
-  @Column({ type: 'float' })
-  amount: number;
-
-  @Column()
-  employer: string;
-
   @UpdateDateColumn()
   foundOn: Date;
-
-  @UpdateDateColumn()
-  lastUpdatedAt: Date;
-
-  @Column()
-  monthlyPayment: number;
 
   @Column()
   isDraft: boolean;

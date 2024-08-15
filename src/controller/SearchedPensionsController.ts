@@ -8,11 +8,16 @@ export class SearchedPensionsController {
 
   async all(request: Request, response: Response, next: NextFunction) {
     try {
-      const searchedPensions = this.searchedPensionsRepositiory.find({
-        relations: ['pensionProvider'],
+      const searchedPensions = await this.searchedPensionsRepositiory.find({
+        relations: ['pensionPot'],
       });
-      
-      return response.json(searchedPensions);
+
+      const flattenedSearchedPensions = searchedPensions.map((searchPension) => {
+        const { pensionPot, ...rest } = searchPension;
+        return { ...rest, ...pensionPot, id: pensionPot.id };
+      });
+
+      return flattenedSearchedPensions;
     } catch (error) {
       console.error('Error fetching pension pots:', error);
       

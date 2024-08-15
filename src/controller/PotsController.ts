@@ -10,20 +10,31 @@ export class PotsController {
 
   async all(request: Request, response: Response) {
     try {
-      const pensionPots = await this.pensionPotRepository.find({
-        relations: ['pensionProvider'],
-      });
-      const searchedPensionPots = await this.searchedPensionsRepositiory.find({
-        relations: ['pensionProvider'],
-      });
+      const pots = await this.pensionPotRepository.createQueryBuilder('pot')
+        .leftJoinAndSelect('pot.pensionProvider', 'pensionProvider')
+        .leftJoinAndSelect('pot.searchedPensions', 'searchedPensions')
+        .getMany();
 
-      return response.json([...pensionPots, ...searchedPensionPots]);
+      const flattenedPots = pots.map((pensionPot) => {
+        const { searchedPensions, ...rest } = pensionPot;
+        return { ...rest, ...searchedPensions[0], id: pensionPot.id };
+      });  
+
+      return flattenedPots;
     } catch (error) {
       console.error('Error fetching pension pots:', error);
 
-      return response
-        .status(500)
-        .json({ message: 'An error occurred while fetching pension pots' });
+      return { message: 'An error occurred while fetching pension pots' };
     }
+  }
+
+  async searchPots(request: Request, response: Response) {
+      try {
+
+      } catch (error) {
+        console.error('Error searching pension pots:', error);
+
+        return { message: 'An error occurred while searching pension pots' };
+      }
   }
 }
