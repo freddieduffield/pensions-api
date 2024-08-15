@@ -26,4 +26,24 @@ export class SearchedPensionsController {
         .json({ message: 'An error occurred while fetching pension pots' });
     }
   }
+
+  async allFound(request: Request, response: Response, next: NextFunction) {
+    try {
+      const searchedPensions = await this.searchedPensionsRepositiory.find({
+        where: { status: 'FOUND' },
+        relations: ['pensionPot'],
+      });
+
+      const flattenedSearchedPensions = searchedPensions.map((searchPension) => {
+        const { pensionPot, ...rest } = searchPension;
+        return { ...rest, ...pensionPot, id: pensionPot.id };
+      });
+
+      return flattenedSearchedPensions;
+    } catch (error) {
+      console.error('Error fetching pension pots:', error);
+      
+      return { message: 'An error occurred while fetching pension pots' };
+    }
+  }
 }
