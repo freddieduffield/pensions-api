@@ -17,4 +17,9 @@ export const Routes = [{
     route: "/pots",
     controller: PotsController,
     action: "all", 
+}, {
+    method: "get",
+    route: "/pots/search",
+    controller: PotsController,
+    action: "searchPots",  
 }]

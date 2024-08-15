@@ -30,7 +30,19 @@ export class PotsController {
 
   async searchPots(request: Request, response: Response) {
       try {
+        const { potName } = request.query;
+                
+        const pot = await this.pensionPotRepository.findOne({
+          where: { potName: potName as string },
+          relations: ['pensionProvider'],
+        });
 
+        if (!pot) {
+          return { message: 'Pension pot not found' };
+        }
+
+        return pot;
+        
       } catch (error) {
         console.error('Error searching pension pots:', error);
 

@@ -28,7 +28,8 @@ export async function initializeAppServer() {
             `Express server has started on port ${PORT}. 
             1. http://localhost:${PORT}/pension-pots 
             2. http://localhost:${PORT}/searched-pensions
-            3. http://localhost:${PORT}/pots`
+            3. http://localhost:${PORT}/pots
+            4. http://localhost:${PORT}/pots/search?potName=Google`
         )
        })
 
