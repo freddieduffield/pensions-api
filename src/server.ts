@@ -29,7 +29,9 @@ export async function initializeAppServer() {
             1. http://localhost:${PORT}/pension-pots 
             2. http://localhost:${PORT}/searched-pensions
             3. http://localhost:${PORT}/pots
-            4. http://localhost:${PORT}/pots/search?potName=Google`
+            4. http://localhost:${PORT}/pots/search?potName=Google
+            5. http://localhost:${PORT}/pots/search?id=c3fb7d63-d9e1-4656-b4f8-bffbd8f4ba02
+               (^^^ eg. ^^^ id generated automatically each time the db is populated) `
         )
        })
 

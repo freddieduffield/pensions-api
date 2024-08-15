@@ -33,7 +33,7 @@ export class PotsController {
         const { potName } = request.query;
                 
         const pot = await this.pensionPotRepository.findOne({
-          where: { potName: potName as string },
+          where: { ...request.query },
           relations: ['pensionProvider'],
         });
 
