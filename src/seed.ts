@@ -1,5 +1,5 @@
 import { AppDataSource } from './data-source';
-import { PensionPot } from './entity/PensionPot';
+import { PensionPot } from './components/pension-pots/PensionPot';
 import { PensionProvider } from './components/pension-providers/PensionProvider';
 import { SearchedPensions } from './components/searched-pensions/SearchedPensions';
 

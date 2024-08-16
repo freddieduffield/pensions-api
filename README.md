@@ -1,10 +1,10 @@
 # Pension Pots API 
 
-## Instructions
+## running the application
 
 1. **start postgres in docker container**
 ```
-docker-compose up
+docker-compose up -d
 ```
 2. **run app**
 ```
