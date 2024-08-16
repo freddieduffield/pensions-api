@@ -42,7 +42,8 @@ export async function initializeAppServer() {
         7. http://localhost:${PORT}/pots/search/annualInterestRate?lessThan=0.01
         8. http://localhost:${PORT}/searched-pensions/found
         9. http://localhost:${PORT}/pots/search?employer=IBM
-        10. http://localhost:${PORT}/pots/search?pensionProvider=Scottish%20Widows`);
+        10. http://localhost:${PORT}/pots/search?pensionProvider=Scottish%20Widows
+        11. http://localhost:${PORT}/pots?forecast=true&years=10`);
     });
   });
 }

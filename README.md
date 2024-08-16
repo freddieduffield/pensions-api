@@ -32,13 +32,18 @@
 
 ## Tradeoffs
 
-- **Typeorm starter** - Choose to use typeorm becuase have recently inherited a project at work that uses it and wanted to build something from scratch to improve my understanding of it. I decided to use the starter script `typeorm init --database postgres --express` owing to time limits. It got me up and running quickly but dependencies where a little outdated along with the TypeScript config. With more time, I'd prefer to modify the config or set up the project from scratch. Also Typeorm itself didn't play nicely with the test setup I am used to so stopped me from getting going with that.
+- **Typeorm starter** - Choose to use typeorm becuase have recently inherited a project at work that uses it and wanted to build something from scratch to improve my understanding of it. I decided to use the starter script `typeorm init --database postgres --express` owing to time limits. It got me up and running quickly but dependencies where a little outdated along with the TypeScript config. With more time, I'd prefer to modify the config or set up the project from scratch. Also Typeorm itself didn't play nicely with the test setup I used to so stopped me from getting going with that.
 
 ## Whats next? 
 - fix and write more tests
-- refactor code so organised according to components - `pensionPots` & `searchedPensions`
+- refactor code so organised according to components - `pensionPots` & `searchedPensions` & `pots`
 - extract repetative code in reusable utils - e.g. `flattenSearchedPensions`
 - For the search endpoint on each search update the `searched_pensions` table
 - remove extraineous data from response e.g. `searchedPensions` or `id` on pension providers
-- 
+- more tests for calculateFutureValue - happy path as well for with no values. 
+- setup `docker-compose` to run the app as well
+
+
+
+
   
