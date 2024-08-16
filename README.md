@@ -17,7 +17,7 @@
   8. `/searched-pensions/found`
   9. `/pots/search?employer=:employer`
   10. `/pots/search?pensionProvider=:pensionProvider.name`
-  11. `/pots?forecast=true`
+  11. `/pots?forecast=true&years=10`
 6. write acceptatance tests for each endpoint 
 
 ### Technology 
