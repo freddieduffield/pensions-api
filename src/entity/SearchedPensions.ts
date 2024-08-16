@@ -11,7 +11,7 @@ import {
 import { PensionProvider } from './PensionProvider';
 import { PensionPot } from './PensionPot';
 
-@Entity('searched_providers')
+@Entity('searched_pensions')
 export class SearchedPensions {
   @PrimaryGeneratedColumn('uuid')
   id: string;

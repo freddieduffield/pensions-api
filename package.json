@@ -19,7 +19,8 @@
    "scripts": {
       "start": "ts-node src/index.ts",
       "dev": "nodemon -w *.ts -x ts-node src/index.ts",
-      "test": "vitest",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "test": "vitest run",
+      "typeorm": "typeorm-ts-node-commonjs",
+      "seed": "ts-node ./src/seed.ts"
    }
 }

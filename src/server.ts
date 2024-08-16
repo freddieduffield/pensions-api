@@ -1,7 +1,7 @@
+import 'reflect-metadata';
 import express, { Request, Response }  from "express";
 import type http from 'node:http';
 import { Routes } from "./routes";
-import { populateDatabase } from "./seed";
 
 const PORT = 3000;  
 
@@ -38,8 +38,6 @@ export async function initializeAppServer() {
             9. http://localhost:3000/pots/search?employer=IBM`
         )
        })
-
-       await populateDatabase();
   });
 }
 

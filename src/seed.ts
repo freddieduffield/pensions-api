@@ -3,16 +3,15 @@ import { PensionPot } from './entity/PensionPot';
 import { PensionProvider } from './entity/PensionProvider';
 import { SearchedPensions } from './entity/SearchedPensions';
 
-export async function populateDatabase() {
+async function populateDatabase() {
   try {
     const pensionPotRepository = AppDataSource.getRepository(PensionPot);
     const pensionProviderRepository =
       AppDataSource.getRepository(PensionProvider);
     const searchedPensionsRepository =
       AppDataSource.getRepository(SearchedPensions);
-
+      
     await searchedPensionsRepository.delete({});
-    
     await pensionPotRepository.delete({});
     await pensionProviderRepository.delete({});
 
@@ -201,3 +200,7 @@ export async function populateDatabase() {
     console.error('Error populating database:', error);
   }
 }
+
+(async function () {
+  await populateDatabase();
+})();

@@ -1,6 +1,5 @@
-import { Entity, Column, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { PensionPot } from './PensionPot';
-import { SearchedPensions } from './SearchedPensions';
 
 @Entity('pension_providers')
 export class PensionProvider {
@@ -13,6 +12,6 @@ export class PensionProvider {
   @Column({ nullable: true })
   value: string;
 
-  @OneToOne(() => PensionPot, (pensionPot) => pensionPot.pensionProvider)
+  @OneToMany(() => PensionPot, (pensionPot) => pensionPot.pensionProvider)
   pensionPot: PensionPot;
 }

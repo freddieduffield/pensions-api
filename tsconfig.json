@@ -7,14 +7,16 @@
       "target": "es5",
       "module": "commonjs",
       "moduleResolution": "node",
-      "outDir": "./build",
+      "noEmit": true,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true,
       "esModuleInterop": true,
       "skipLibCheck": true,
-      "types": [
-      "vitest/importMeta"
-    ]
-   }
+      "types": ["vitest/globals"]
+   },
+   "exclude": [
+      "node_modules", 
+      "build",
+   ]
 }

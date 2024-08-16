@@ -1,17 +1,19 @@
-import { afterAll, beforeEach, expect, test } from 'vitest';
+import 'reflect-metadata';
 import { initializeAppServer, stopAppServer } from '../server';
 import { AppDataSource } from '../data-source';
+
 
 let server;
 
 beforeEach(async () => {
-  AppDataSource.initialize().then(async () => {
+  await AppDataSource.initialize().then(async () => {
     server = await initializeAppServer();
   }).catch(error => console.log(error))
 });
 
-afterAll(() => {
-  stopAppServer();
+afterAll(async () => {
+  await stopAppServer();
+  await AppDataSource.destroy();
 });
 
 test('/pension-pots returns a list of pension pots', async () => {

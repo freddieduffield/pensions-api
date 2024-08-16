@@ -3,9 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   UpdateDateColumn,
-  OneToOne,
   JoinColumn,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { PensionProvider } from './PensionProvider';
 import { SearchedPensions } from './SearchedPensions';
@@ -39,7 +39,7 @@ export class PensionPot {
   @Column({ nullable: true })
   isWorkplacePension: boolean;
 
-  @OneToOne(
+  @ManyToOne(
     () => PensionProvider,
     (pensionProvider) => pensionProvider.pensionPot,
     { cascade: true, onDelete: 'CASCADE' }
