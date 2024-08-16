@@ -38,4 +38,7 @@
 - fix and write more tests
 - refactor code so organised according to components - `pensionPots` & `searchedPensions`
 - extract repetative code in reusable utils - e.g. `flattenSearchedPensions`
+- For the search endpoint on each search update the `searched_pensions` table
+- remove extraineous data from response e.g. `searchedPensions` or `id` on pension providers
+- 
   

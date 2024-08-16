@@ -30,8 +30,15 @@ export class PotsController {
 
   async searchPots(request: Request, response: Response) {
       try {
-        const { potName } = request.query;
-                
+        if ('pensionProvider' in request.query) {
+          const pots = await this.pensionPotRepository.find({
+            where: { pensionProvider: { name: request.query.pensionProvider.toString() } },
+            relations: ['pensionProvider', 'searchedPensions'],
+          });
+
+          return pots;
+        }
+        
         const pot = await this.pensionPotRepository.findOne({
           where: { ...request.query },
           relations: ['pensionProvider'],
