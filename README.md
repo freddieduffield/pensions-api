@@ -15,6 +15,11 @@ npm start
 npm run seed
 ```
 
+N.B. you will see error, but it won't impact the application.
+```
+Error populating database: EntityMetadataNotFoundError: No metadata for "SearchedPensions" was found.
+```
+
 ## Plan 
 
 1. Setup postgres with docker for local development 
@@ -71,6 +76,7 @@ npm run seed
 - remove extraineous data from response e.g. `searchedPensions` or `id` on pension providers
 - more tests for `calculateFutureValue` - happy path as well for with no values. 
 - setup `docker-compose` to run the app as well
+- fix the `EntityMetadataNotFoundError` when populating the db.
 
 
 
