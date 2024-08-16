@@ -1,15 +1,12 @@
 import {
   Entity,
   Column,
-  OneToOne,
   PrimaryGeneratedColumn,
   JoinColumn,
   UpdateDateColumn,
-  TableForeignKey,
   ManyToOne,
 } from 'typeorm';
-import { PensionProvider } from './PensionProvider';
-import { PensionPot } from './PensionPot';
+import { PensionPot } from '../pension-pots/PensionPot';
 
 @Entity('searched_pensions')
 export class SearchedPensions {

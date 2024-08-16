@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { PensionPot } from './PensionPot';
+import { PensionPot } from '../pension-pots/PensionPot';
 
 @Entity('pension_providers')
 export class PensionProvider {

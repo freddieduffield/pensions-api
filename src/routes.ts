@@ -1,6 +1,6 @@
-import { PensionPotController } from "./controller/PensionPotController"
-import { PotsController } from "./controller/PotsController"
-import { SearchedPensionsController } from "./controller/SearchedPensionsController"
+import { PensionPotController } from "./components/pension-pots/PensionPotController"
+import { PotsController } from "./components/pots/PotsController"
+import { SearchedPensionsController } from "./components/searched-pensions/SearchedPensionsController"
 
 export const Routes = [{
     method: "get",

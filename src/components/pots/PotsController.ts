@@ -1,8 +1,8 @@
 import { type Request, type Response } from 'express';
-import { AppDataSource } from '../data-source';
-import { PensionPot } from '../entity/PensionPot';
-import { SearchedPensions } from '../entity/SearchedPensions';
-import { calculateFutureValue } from '../components/pots/utils';
+import { AppDataSource } from '../../data-source';
+import { PensionPot } from '../pension-pots/PensionPot';
+import { SearchedPensions } from '../searched-pensions/SearchedPensions';
+import { calculateFutureValue } from './utils';
 
 export class PotsController {
   private pensionPotRepository = AppDataSource.getRepository(PensionPot);

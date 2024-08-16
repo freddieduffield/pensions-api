@@ -7,8 +7,8 @@ import {
   OneToMany,
   ManyToOne,
 } from 'typeorm';
-import { PensionProvider } from './PensionProvider';
-import { SearchedPensions } from './SearchedPensions';
+import { PensionProvider } from '../pension-providers/PensionProvider';
+import { SearchedPensions } from '../searched-pensions/SearchedPensions';
 
 @Entity('pension_pots')
 export class PensionPot {

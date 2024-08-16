@@ -1,6 +1,6 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../../data-source';
 import { NextFunction, Request, Response } from 'express';
-import { SearchedPensions } from '../entity/SearchedPensions';
+import { SearchedPensions } from './SearchedPensions';
 
 export class SearchedPensionsController {
   private searchedPensionsRepositiory =

@@ -1,8 +1,6 @@
-import { AppDataSource } from '../data-source';
+import { AppDataSource } from '../../data-source';
 import { NextFunction, Request, Response } from 'express';
-import { PensionPot } from '../entity/PensionPot';
-import { Not } from 'typeorm';
-
+import { PensionPot } from './PensionPot';
 
 export class PensionPotController {
   private pensionPotsRepository = AppDataSource.getRepository(PensionPot);

@@ -1,7 +1,7 @@
 import { AppDataSource } from './data-source';
 import { PensionPot } from './entity/PensionPot';
-import { PensionProvider } from './entity/PensionProvider';
-import { SearchedPensions } from './entity/SearchedPensions';
+import { PensionProvider } from './components/pension-providers/PensionProvider';
+import { SearchedPensions } from './components/searched-pensions/SearchedPensions';
 
 async function populateDatabase() {
   try {
